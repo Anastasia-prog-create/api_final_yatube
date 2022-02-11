@@ -9,6 +9,10 @@ class Group(models.Model):
     slug = models.SlugField(unique=True)
     description = models.TextField(null=True, blank=True)
 
+    class Meta:
+        verbose_name = 'Сообщество'
+        verbose_name_plural = 'Сообщества'
+
     def __str__(self):
         return self.title
 
@@ -24,6 +28,10 @@ class Post(models.Model):
         Group, on_delete=models.SET_NULL,
         related_name="posts", blank=True, null=True
     )
+
+    class Meta:
+        verbose_name = 'Пост'
+        verbose_name_plural = 'Посты'
 
     def __str__(self):
         return(
@@ -43,6 +51,10 @@ class Comment(models.Model):
     created = models.DateTimeField(
         'Дата добавления', auto_now_add=True, db_index=True)
 
+    class Meta:
+        verbose_name = 'Комментарий'
+        verbose_name_plural = 'Комментарии'
+
 
 class Follow(models.Model):
     user = models.ForeignKey(
@@ -57,6 +69,8 @@ class Follow(models.Model):
     )
 
     class Meta:
+        verbose_name = 'Подписка'
+        verbose_name_plural = 'Подписки'
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'following'],
